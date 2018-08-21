@@ -3,7 +3,7 @@ import Movies from './components/movies'
 import Customers from './components/customers';
 import Rental from './components/rental';
 import NotFound from './components/notFound';
-import NV from "./components/navBar";
+import NavBar from "./components/navBar";
 import { Route, Redirect, Switch } from 'react-router-dom'
 import './App.css';
 
@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <NV />
+        <NavBar />
         <main className="container">
           <Switch>
             <Route path="/movies" component={Movies}></Route>
