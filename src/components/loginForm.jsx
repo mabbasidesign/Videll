@@ -19,14 +19,22 @@ class LoginForm extends Component {
         const username = this.username.current.value;
     }
 
-    handleChange = e => {
+    // handleChange = e => {
+    //     const account = {...this.state.account};
+    //     account[e.currentTarget.name] = e.currentTarget.value;
+    //     this.setState({ account });
+    // }
+
+    handleChange = ({ currentTarget: input }) => {
         const account = {...this.state.account};
-        account.username = e.currentTarget.value;
+        account[input.name] = input.value;
         this.setState({ account });
     }
 
-    render() { 
-        return (  
+    render() {
+        const { account } = this.state;
+
+        return ( 
             <div>
                 <h1>Log in</h1>
                 <form onSubmit={this.handleSubmit}>
@@ -34,14 +42,23 @@ class LoginForm extends Component {
                         <label htmlFor="username">Username:</label>
                         <input
                         onChange={this.handleChange}
-                        value={this.state.account.username}
+                        value={account.username}
                         ref={this.username}
-                        id="username" type="text"
+                        id="username"
+                        type="text"
+                        name="username"
                         className="form-control"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Username:</label>
-                        <input id="password" type="text" className="form-control"/>
+                        <input
+                        onChange={this.handleChange}
+                        ref={this.password}
+                        value={account.password}
+                        name="password"
+                        id="password"
+                        type="text"
+                        className="form-control"/>
                     </div>
                     <button type="submit" className="btn btn-primary">Login</button>
                 </form>
