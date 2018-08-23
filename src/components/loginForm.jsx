@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Input from "../common/input";
 
 class LoginForm extends Component {
 
@@ -19,17 +20,17 @@ class LoginForm extends Component {
         const username = this.username.current.value;
     }
 
-    // handleChange = e => {
-    //     const account = {...this.state.account};
-    //     account[e.currentTarget.name] = e.currentTarget.value;
-    //     this.setState({ account });
-    // }
-
-    handleChange = ({ currentTarget: input }) => {
+    handleChange = e => {
         const account = {...this.state.account};
-        account[input.name] = input.value;
+        account[e.currentTarget.name] = e.currentTarget.value;
         this.setState({ account });
     }
+
+    // handleChange = ({ currentTarget: input }) => {
+    //     const account = {...this.state.account};
+    //     account[input.name] = input.value;
+    //     this.setState({ account });
+    // }
 
     render() {
         const { account } = this.state;
@@ -38,28 +39,21 @@ class LoginForm extends Component {
             <div>
                 <h1>Log in</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="username">Username:</label>
-                        <input
-                        onChange={this.handleChange}
-                        value={account.username}
-                        ref={this.username}
-                        id="username"
-                        type="text"
-                        name="username"
-                        className="form-control"/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Username:</label>
-                        <input
-                        onChange={this.handleChange}
-                        ref={this.password}
-                        value={account.password}
-                        name="password"
-                        id="password"
-                        type="text"
-                        className="form-control"/>
-                    </div>
+
+                <Input
+                    name="username"
+                    value={account.username}
+                    label="Username"
+                    onChange={this.handleChange}
+                />
+
+                 <Input
+                    name="password"
+                    value={account.password}
+                    label="Password"
+                    onChange={this.handleChange}
+                />
+                    
                     <button type="submit" className="btn btn-primary">Login</button>
                 </form>
             </div>
