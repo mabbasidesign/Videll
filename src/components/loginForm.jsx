@@ -5,19 +5,32 @@ class LoginForm extends Component {
 
     state = {
         account: {username: "", password: ""},
+        errors: {}
+    };
+
+    validate = () => {
+        const errors = {};
+
+        const { account } = this.state;
+        if(account.username.trim() === "" )
+            errors.username = "Username is required";
+        if(account.password.trim() === "")
+            errors.password = "Password is required";
+
+        return Object.keys(errors).length === 0 ? null: errors;
     };
 
     username = React.createRef();
 
-    componentDidMount(){
-        this.username.current.focus();
-    }
-
     handleSubmit = e => {
         e.preventDefault();
-        console.log("submitted")
 
-        const username = this.username.current.value;
+        const errors = this.validate();
+        console.log(errors);
+        this.setState({ errors });
+        if(errors) return;
+
+        console.log("submitted");
     }
 
     handleChange = e => {
@@ -39,21 +52,18 @@ class LoginForm extends Component {
             <div>
                 <h1>Log in</h1>
                 <form onSubmit={this.handleSubmit}>
-
                 <Input
                     name="username"
                     value={account.username}
                     label="Username"
                     onChange={this.handleChange}
                 />
-
                  <Input
                     name="password"
                     value={account.password}
                     label="Password"
                     onChange={this.handleChange}
                 />
-                    
                     <button type="submit" className="btn btn-primary">Login</button>
                 </form>
             </div>
